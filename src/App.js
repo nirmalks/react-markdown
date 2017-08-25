@@ -25,11 +25,13 @@ class App extends Component {
         <div className="App-header">
           <h2>Markdown Previewer</h2>
         </div>
-
-        <textarea placeholder="Enter your text" value= {this.state.textData} onChange={this.handleTextDataChanged}></textarea>
-        <div>
+        <div className="input-area">
+        <h3>Enter your text</h3>
+        <textarea rows="20" cols="100" placeholder="Enter your text" value= {this.state.textData} onChange={this.handleTextDataChanged}></textarea>
+        </div>
+        <div className="output-area">
           <h3>Markdown Output</h3>
-          <div dangerouslySetInnerHTML={{ __html: (this.state.markedDownOutput || '')}}></div>
+          <p dangerouslySetInnerHTML={{ __html: (this.state.markedDownOutput || '')}}></p>
         </div>
       </div>
     );
