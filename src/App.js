@@ -1,18 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import marked from 'marked';
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      textData : '',
+      markedDownOutput: ''
+    };
+
+    this.handleTextDataChanged = this.handleTextDataChanged.bind(this);
+  }
+
+  handleTextDataChanged(event) {
+    this.setState( { textData : event.target.value });
+    this.setState({
+      markedDownOutput: marked(this.state.textData)
+    });
+  }
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Markdown Previewer</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+
+        <textarea placeholder="Enter your text" value= {this.state.textData} onChange={this.handleTextDataChanged}></textarea>
+        <div>
+          <h3>Markdown Output</h3>
+          <div dangerouslySetInnerHTML={{ __html: (this.state.markedDownOutput || '')}}></div>
+        </div>
       </div>
     );
   }
